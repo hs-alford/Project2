@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Project2.Data.Migrations
+#nullable disable
+
+namespace Project2.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class Mig01 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,6 +49,19 @@ namespace Project2.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CustomerGroups",
+                columns: table => new
+                {
+                    CustomerGroupId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    GroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerGroups", x => x.CustomerGroupId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DeviceCodes",
                 columns: table => new
                 {
@@ -58,11 +73,29 @@ namespace Project2.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Expiration = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 52920, nullable: false)
+                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DeviceCodes", x => x.UserCode);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Employees",
+                columns: table => new
+                {
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,15 +105,55 @@ namespace Project2.Data.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Use = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
+                    Use = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Algorithm = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     IsX509Certificate = table.Column<bool>(type: "bit", nullable: false),
                     DataProtected = table.Column<bool>(type: "bit", nullable: false),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 52920, nullable: false)
+                    Data = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Keys", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MenuItems",
+                columns: table => new
+                {
+                    MenuItemId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Parent = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Controller = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Action = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Enabled = table.Column<bool>(type: "bit", nullable: true),
+                    SecurityID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Dashboard = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Customization = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Report = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MenuItems", x => x.MenuItemId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Parts",
+                columns: table => new
+                {
+                    PartId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PartDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    QtyInStock = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Parts", x => x.PartId);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,7 +169,7 @@ namespace Project2.Data.Migrations
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Expiration = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ConsumedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 52920, nullable: false)
+                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -209,6 +282,109 @@ namespace Project2.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    CustId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerGroupId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.CustId);
+                    table.ForeignKey(
+                        name: "FK_Customers_CustomerGroups_CustomerGroupId",
+                        column: x => x.CustomerGroupId,
+                        principalTable: "CustomerGroups",
+                        principalColumn: "CustomerGroupId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderDtls",
+                columns: table => new
+                {
+                    OrderNumber = table.Column<int>(type: "int", nullable: false),
+                    OrderLine = table.Column<int>(type: "int", nullable: false),
+                    PartId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LineDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderQty = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ExtPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderDtls", x => new { x.OrderNumber, x.OrderLine });
+                    table.ForeignKey(
+                        name: "FK_OrderDtls_Parts_PartId",
+                        column: x => x.PartId,
+                        principalTable: "Parts",
+                        principalColumn: "PartId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderHeds",
+                columns: table => new
+                {
+                    OrderNumber = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProjectId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    OrderTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderHeds", x => x.OrderNumber);
+                    table.ForeignKey(
+                        name: "FK_OrderHeds_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    ProjectId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Descripton = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    OrderNumber = table.Column<int>(type: "int", nullable: true),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PM_EmpId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.ProjectId);
+                    table.ForeignKey(
+                        name: "FK_Projects_Customers_CustId",
+                        column: x => x.CustId,
+                        principalTable: "Customers",
+                        principalColumn: "CustId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Projects_Employees_PM_EmpId",
+                        column: x => x.PM_EmpId,
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeId");
+                    table.ForeignKey(
+                        name: "FK_Projects_OrderHeds_OrderNumber",
+                        column: x => x.OrderNumber,
+                        principalTable: "OrderHeds",
+                        principalColumn: "OrderNumber");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -249,6 +425,11 @@ namespace Project2.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Customers_CustomerGroupId",
+                table: "Customers",
+                column: "CustomerGroupId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
                 table: "DeviceCodes",
                 column: "DeviceCode",
@@ -263,6 +444,21 @@ namespace Project2.Data.Migrations
                 name: "IX_Keys_Use",
                 table: "Keys",
                 column: "Use");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDtls_PartId",
+                table: "OrderDtls",
+                column: "PartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderHeds_CustomerId",
+                table: "OrderHeds",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderHeds_ProjectId",
+                table: "OrderHeds",
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersistedGrants_ConsumedTime",
@@ -283,10 +479,50 @@ namespace Project2.Data.Migrations
                 name: "IX_PersistedGrants_SubjectId_SessionId_Type",
                 table: "PersistedGrants",
                 columns: new[] { "SubjectId", "SessionId", "Type" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_CustId",
+                table: "Projects",
+                column: "CustId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_OrderNumber",
+                table: "Projects",
+                column: "OrderNumber",
+                unique: true,
+                filter: "[OrderNumber] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_PM_EmpId",
+                table: "Projects",
+                column: "PM_EmpId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_OrderDtls_OrderHeds_OrderNumber",
+                table: "OrderDtls",
+                column: "OrderNumber",
+                principalTable: "OrderHeds",
+                principalColumn: "OrderNumber",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_OrderHeds_Projects_ProjectId",
+                table: "OrderHeds",
+                column: "ProjectId",
+                principalTable: "Projects",
+                principalColumn: "ProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Customers_CustomerGroups_CustomerGroupId",
+                table: "Customers");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Projects_OrderHeds_OrderNumber",
+                table: "Projects");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -309,6 +545,12 @@ namespace Project2.Data.Migrations
                 name: "Keys");
 
             migrationBuilder.DropTable(
+                name: "MenuItems");
+
+            migrationBuilder.DropTable(
+                name: "OrderDtls");
+
+            migrationBuilder.DropTable(
                 name: "PersistedGrants");
 
             migrationBuilder.DropTable(
@@ -316,6 +558,24 @@ namespace Project2.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Parts");
+
+            migrationBuilder.DropTable(
+                name: "CustomerGroups");
+
+            migrationBuilder.DropTable(
+                name: "OrderHeds");
+
+            migrationBuilder.DropTable(
+                name: "Projects");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
         }
     }
 }

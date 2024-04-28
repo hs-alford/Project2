@@ -1,14 +1,95 @@
-/* Provide sufficient contrast against white background */
+
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 code {
-  color: #E01A76;
+    color: #E01A76;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+}
+
+.aside-left {
+    order: 1;
+    width: 4% !important;
+    height: 100vh;
+    justify-items: center;
+}
+
+.main-section {
+    order: 2;
+}
+
+#page-wrapper {
+    height: 100vh !important;
+    overflow: auto;
+}
+
+.aside-left a.nav-link svg.bi {
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.aside-left a.nav-link {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+header {
+    background-color: #11253a;
+}
+
+.wrapper {
+    background-color: #111f2e;
+}
+
+h1, h2, h3, h4, h5, h6, p, button, a, li, td, th, div {
+    color: white !important;
+}
+
+
+.card {
+    background-color: #11253a !important;
+    border-color: #5e5e5e !important;
+}
+
+.main-menu-links {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    row-gap: 20px;
+    column-gap: 30px;
+}
+
+.main-menu-link {
+    text-decoration: none;
+}
+
+    .main-menu-link .card {
+        height: 4rem;
+        width: 25rem;
+    }
+
+
+        .main-menu-link .card:hover {
+            background-color: darkslategray !important;
+        }
+
+
+.data-table-heading {
+    display:flex;
+    justify-content: space-between;
+}
+
+.data-table-heading button {
+    line-height:1px;
 }

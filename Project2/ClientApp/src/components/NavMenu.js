@@ -24,32 +24,33 @@ export class NavMenu extends Component {
 
   render() {
     return (
-      <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container light>
-          <NavbarBrand tag={Link} to="/">Project2</NavbarBrand>
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-            <ul className="navbar-nav flex-grow">
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/employee-list">Employees</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/add-employee">Add Employee</NavLink>
-              </NavItem>
-              <LoginMenu>
-              </LoginMenu>
-            </ul>
-          </Collapse>
-        </Navbar>
+        <header>
+            <Navbar className="navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow px-3">
+                <NavbarBrand tag={Link} to="/">BPM Application</NavbarBrand>
+                <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+                <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
+                    <ul className="navbar-nav flex-grow">
+                        <NavItem>
+                            <NavLink tag={Link} className="text-light" to="/">Home</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} className="text-light" to="/counter">Counter</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} className="text-light" to="/fetch-data">Fetch data</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} className="text-light" to="/employee-list">Employees</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} className="text-light" to="/add-employee">Add Employee</NavLink>
+                        </NavItem>
+                        <LoginMenu>
+                        </LoginMenu>
+                    </ul>
+                </Collapse>
+            </Navbar>
+       
       </header>
     );
   }

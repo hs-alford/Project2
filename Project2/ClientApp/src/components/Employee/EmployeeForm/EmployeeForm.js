@@ -14,8 +14,8 @@ export const EmployeeForm = ({ onEmployeeAdded }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    let today = new Date().toJSON();
+      event.preventDefault();
+      let today = new Date().toJSON();
     const newEmployee = { employeeId, firstName, lastName, emailAddress, jobTitle, active, dateAdded: today , phoneNumber };
     try {
       //await employeeService.addEmployee(newEmployee);

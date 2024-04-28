@@ -16,6 +16,7 @@
     "react-scripts": "^5.0.1",
     "reactstrap": "^9.1.1",
     "rimraf": "^3.0.2",
+    "spa-proxy": "^1.0.8",
     "uniforms": "^4.0.0-alpha.5",
     "uniforms-bootstrap5": "^4.0.0-alpha.5",
     "uniforms-bridge-json-schema": "^4.0.0-alpha.5",

@@ -45,8 +45,14 @@ const EmployeeList = () => {
   };
 
   return (
-    <div className="container">
-      <h2 className="my-4">Employee List</h2>
+      <div>
+          <div className="data-table-heading pt-2 pb-2">
+              <h2 className="">Employee List</h2>
+              <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                  Toggle static offcanvas
+              </button>
+          </div>
+      <hr />
       <table className='table table-striped' aria-labelledby="tabelLabel">
         <thead>
           <tr>
@@ -62,11 +68,23 @@ const EmployeeList = () => {
         </thead>
         <tbody>
           {employees.map(employee => (
-            <EmployeeListItem key={employee.employeeId} employee={employee} onDelete={() => handleDelete(employee.employeeId)} onEdit={handleEdit} />
+            <EmployeeListItem key={employee.employeeId} employee={employee} onDelete={() => handleDelete(employee.employeeId)} onEdit={() => handleEdit()} />
           ))}          
         </tbody>
       </table>
+          
 
+          <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+              <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                  <div>
+                      I will not close if you click outside of me.
+                  </div>
+              </div>
+          </div>
     </div>
   );
 };

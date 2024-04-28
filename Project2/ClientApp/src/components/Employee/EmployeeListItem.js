@@ -28,22 +28,26 @@ const EmployeeListItem = ({ employee, onDelete, onEdit }) => {
       const token = await authService.getAccessToken();
       const path = 'https://localhost:7163/employee/' + employeeId;
       const response = await fetch(path, {
-        method: "POST",
+        method: "PUT",
         headers: !token ? {} : {
           'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': `Bearer ${token}`,
           'Origin': 'http://localhost:44490'
         },
         body: JSON.stringify(editedEmployee)
       });
-      const result = await response.json();
-      console.log("Success:", result);
-      setIsEditing(false);
-      onEdit(); // Refresh employee list
+      //const result = await response.json();
+        //console.log("Success:", result);
+        
+        setIsEditing(false);
+        handleRefresh(); // Refresh employee list
     } catch (error) {
       console.error('Error updating employee:', error);
     }
   };
 
+    const handleRefresh = () => {
+        onEdit()
+    };
   const handleCancel = () => {
     setIsEditing(false);
     // Reset edited values
@@ -52,7 +56,8 @@ const EmployeeListItem = ({ employee, onDelete, onEdit }) => {
     setEditedEmailAddress(employee.emailAddress);
     setEditedPhoneNumber(employee.phoneNumber);
     setEditedJobTitle(employee.jobTitle);
-  };
+    };
+
 
   return (
 
@@ -77,7 +82,7 @@ const EmployeeListItem = ({ employee, onDelete, onEdit }) => {
               <label class="form-check-label" for="inactive">Inactive</label>
             </div>
           </td>
-          <td><input type="text" className="form-control" value={dateAdded} disabled required /></td>
+          <td><input type="text" className="form-control" value={dateAdded} disabled /></td>
           <td>
             <button className="btn btn-success me-2" onClick={handleSave}>Save</button>
             <button className="btn btn-secondary" onClick={handleCancel}>Cancel</button>
@@ -92,8 +97,8 @@ const EmployeeListItem = ({ employee, onDelete, onEdit }) => {
             <td>{employee.emailAddress}</td>
             <td>{employee.phoneNumber}</td>
             <td>{employee.jobTitle}</td>
-            <td>{employee.active}</td>
-            <td>{employee.dateAdded}</td>
+            <td>{employee.active ? 'Active' : 'Inactive'}</td>
+            <td>{employee.dateAdded.split('T')[0]}</td>
             <td>
               <button className="btn btn-danger me-2" onClick={onDelete}>Delete</button>
               <button className="btn btn-primary" onClick={handleEdit}>Edit</button>
